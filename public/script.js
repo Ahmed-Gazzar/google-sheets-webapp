@@ -50,6 +50,20 @@ async function validateUser(id, phone) {
 
         const data = await response.json();
         
+        // Handle maintenance mode or outside hours
+        if (data.maintenanceMode || data.status === 'outside_hours') {
+            showError(data.message);
+            
+            // Show additional info for outside hours
+            if (data.status === 'outside_hours') {
+                const additionalInfo = data.activeHours ? 
+                    ` (Active hours: ${data.activeHours})` : '';
+                showError(data.message + additionalInfo);
+            }
+            
+            return null;
+        }
+        
         if (!response.ok) {
             throw new Error(data.message || 'Validation failed');
         }
@@ -64,6 +78,11 @@ async function fetchUserRecords(id) {
     try {
         const response = await fetch(`${API_BASE}/api/records/${id}`);
         const data = await response.json();
+        
+        // Handle maintenance mode or outside hours
+        if (data.maintenanceMode || data.status === 'outside_hours') {
+            throw new Error(data.message);
+        }
         
         if (!response.ok) {
             throw new Error(data.message || 'Failed to fetch records');
@@ -173,6 +192,11 @@ loginForm.addEventListener('submit', async (e) => {
         // Validate user
         const validationResult = await validateUser(id, phone);
         
+        // If maintenance mode or outside hours, validateUser returns null
+        if (!validationResult) {
+            return; // Error message already shown by validateUser
+        }
+        
         if (validationResult.success) {
             currentUser = validationResult.user;
             displayUserInfo(currentUser);
@@ -205,9 +229,36 @@ logoutBtn.addEventListener('click', () => {
     showLoginSection();
 });
 
+// System status check function
+async function checkSystemStatus() {
+    try {
+        const response = await fetch(`${API_BASE}/api/status`);
+        const data = await response.json();
+        
+        if (data.success) {
+            if (data.maintenanceMode) {
+                showError('System is currently under maintenance. Please try again later.');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Maintenance Mode';
+            } else if (!data.withinActiveHours) {
+                const activeHoursText = `${data.activeHours.start}:00 - ${data.activeHours.end}:00`;
+                showError(`System is only available during active hours: ${activeHoursText}. Current time: ${data.currentHour}:00`);
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Outside Active Hours';
+            }
+        }
+    } catch (error) {
+        console.log('Status check failed:', error);
+        // Don't show error to user, just log it
+    }
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Student Records System initialized');
+    
+    // Check system status on load
+    checkSystemStatus();
     
     // Focus on the first input field
     document.getElementById('studentId').focus();
