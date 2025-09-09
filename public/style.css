@@ -6,11 +6,11 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    background-color: #0d1117;
     min-height: 100vh;
     line-height: 1.6;
-    color: #333;
+    color: #e6edf3;
 }
 
 .container {
@@ -23,18 +23,19 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
-    color: white;
+    color: #e6edf3;
 }
 
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: #f0f6fc;
+    font-weight: 600;
 }
 
 header p {
     font-size: 1.1rem;
-    opacity: 0.9;
+    color: #8b949e;
 }
 
 /* Section styles */
@@ -44,16 +45,24 @@ header p {
 
 /* Card styles */
 .form-card, .user-info-card, .records-card {
-    background: white;
-    border-radius: 12px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 24px rgba(1, 4, 9, 0.15);
     margin-bottom: 20px;
 }
 
 .form-card {
     max-width: 400px;
     margin: 0 auto;
+}
+
+.form-card h2 {
+    color: #f0f6fc;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
 }
 
 /* Form styles */
@@ -65,69 +74,77 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
-    color: #555;
+    color: #f0f6fc;
 }
 
 input[type="text"] {
     width: 100%;
     padding: 12px;
-    border: 2px solid #e1e1e1;
-    border-radius: 8px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
     font-size: 16px;
-    transition: border-color 0.3s ease;
+    color: #e6edf3;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input[type="text"]:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #2f81f7;
+    box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.12);
+}
+
+input[type="text"]::placeholder {
+    color: #8b949e;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
+    background-color: #238636;
+    color: #ffffff;
+    border: 1px solid rgba(35, 134, 54, 0.4);
+    border-radius: 6px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    background-color: #2ea043;
+    border-color: rgba(46, 160, 67, 0.4);
 }
 
 button:active {
-    transform: translateY(0);
+    background-color: #2f7e37;
 }
 
 button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    transform: none;
+    background-color: #21262d;
+    border-color: #30363d;
+    color: #8b949e;
 }
 
 /* Message styles */
 .error-message {
-    background: #fee;
-    color: #c33;
+    background-color: #161b22;
+    color: #f85149;
     padding: 12px;
-    border-radius: 8px;
-    border-left: 4px solid #c33;
+    border-radius: 6px;
+    border: 1px solid #da3633;
     margin-top: 15px;
     font-weight: 500;
 }
 
 .loading-message {
-    background: #e8f4fd;
-    color: #1976d2;
+    background-color: #161b22;
+    color: #2f81f7;
     padding: 12px;
-    border-radius: 8px;
-    border-left: 4px solid #1976d2;
+    border-radius: 6px;
+    border: 1px solid #1f6feb;
     margin-top: 15px;
     font-weight: 500;
     text-align: center;
@@ -136,16 +153,17 @@ button:disabled {
 /* User info styles */
 .user-info-card h2, .records-card h2 {
     margin-bottom: 20px;
-    color: #333;
-    border-bottom: 2px solid #667eea;
+    color: #f0f6fc;
+    border-bottom: 1px solid #30363d;
     padding-bottom: 10px;
+    font-weight: 600;
 }
 
 .user-info-item {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #21262d;
 }
 
 .user-info-item:last-child {
@@ -154,21 +172,23 @@ button:disabled {
 
 .user-info-label {
     font-weight: 600;
-    color: #555;
+    color: #8b949e;
 }
 
 .user-info-value {
-    color: #333;
+    color: #e6edf3;
 }
 
 .logout-btn {
-    background: #dc3545;
+    background-color: #da3633;
+    border-color: rgba(218, 54, 51, 0.4);
     margin-top: 20px;
     max-width: 150px;
 }
 
 .logout-btn:hover {
-    background: #c82333;
+    background-color: #f85149;
+    border-color: rgba(248, 81, 73, 0.4);
 }
 
 /* Table styles */
@@ -176,22 +196,23 @@ button:disabled {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background: white;
-    border-radius: 8px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .records-table th,
 .records-table td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #21262d;
+    color: #e6edf3;
 }
 
 .records-table th {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background-color: #21262d;
+    color: #f0f6fc;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.9rem;
@@ -199,7 +220,7 @@ button:disabled {
 }
 
 .records-table tr:hover {
-    background: #f8f9ff;
+    background-color: #0d1117;
 }
 
 .records-table tr:last-child td {
@@ -210,7 +231,7 @@ button:disabled {
 .no-records {
     text-align: center;
     padding: 40px;
-    color: #666;
+    color: #8b949e;
     font-style: italic;
 }
 

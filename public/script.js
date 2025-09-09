@@ -123,7 +123,6 @@ function displayRecordsTable(records) {
         <table class="records-table">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Exam Number</th>
                     <th>Day</th>
                     <th>Educational Center</th>
@@ -134,7 +133,6 @@ function displayRecordsTable(records) {
             <tbody>
                 ${records.map(record => `
                     <tr>
-                        <td>${record.number}</td>
                         <td>${record.examNumber}</td>
                         <td>${record.day}</td>
                         <td>${record.educationalCenter}</td>
