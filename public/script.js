@@ -79,15 +79,15 @@ async function fetchUserRecords(id) {
 function displayUserInfo(user) {
     userInfo.innerHTML = `
         <div class="user-info-item">
-            <span class="user-info-label">Student ID:</span>
+            <span class="user-info-label">الرقم التعريفي للطالب (على المنصة):</span>
             <span class="user-info-value">${user.id}</span>
         </div>
         <div class="user-info-item">
-            <span class="user-info-label">Student Name:</span>
+            <span class="user-info-label">اسم الطالب:</span>
             <span class="user-info-value">${user.name || 'N/A'}</span>
         </div>
         <div class="user-info-item">
-            <span class="user-info-label">Phone:</span>
+            <span class="user-info-label">رقم الهاتف (المسجل على المنصة):</span>
             <span class="user-info-value">${user.phone}</span>
         </div>
     `;
@@ -104,11 +104,11 @@ function displayRecordsTable(records) {
         <table class="records-table">
             <thead>
                 <tr>
-                    <th>Exam Number</th>
-                    <th>Day</th>
-                    <th>Educational Center</th>
-                    <th>Exam Grade</th>
-                    <th>Homework Status</th>
+                    <th>رقم الامتحان</th>
+                    <th>اليوم</th>
+                    <th>اسم السنتر</th>
+                    <th>درجة الامتحان</th>
+                    <th>حالة الواجب</th>
                 </tr>
             </thead>
             <tbody>
@@ -118,7 +118,7 @@ function displayRecordsTable(records) {
                         <td>${record.day}</td>
                         <td>${record.educationalCenter}</td>
                         <td>${record.examGrade}</td>
-                        <td>${record.homeworkStatus}</td>
+                        <td>${record.homeworkStatus === 'Done' ? 'مكتمل' : record.homeworkStatus === 'Partially Done' ? 'الواجب مش كامل' : 'معملش الواجب'}</td>
                     </tr>
                 `).join('')}
             </tbody>
